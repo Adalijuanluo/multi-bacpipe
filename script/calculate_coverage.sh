@@ -22,11 +22,11 @@ echo "Making bigWig and TDF files for sample $TAG.."
 echo "$TAG: scaling bigWig files by 10^9/n.aligned.bases, coefficient is $SCF"
 
 ## deeptools does it faster and result is the same - and no need for an extra utility
-bamCoverage --scaleFactor  $SCF -p $CPUS --filterRNAstrand reverse -b $TAG.bam -bs 1 -o $TAG.plus.bw  &>  $TAG.cov.log
-bamCoverage --scaleFactor -$SCF -p $CPUS --filterRNAstrand forward -b $TAG.bam -bs 1 -o $TAG.minus.bw &>> $TAG.cov.log
+bamCoverage --scaleFactor  $SCF -p $CPUS --filterRNAstrand forward -b $TAG.bam -bs 1 -o $TAG.plus.bw  &>  $TAG.cov.log
+bamCoverage --scaleFactor -$SCF -p $CPUS --filterRNAstrand reverse -b $TAG.bam -bs 1 -o $TAG.minus.bw &>> $TAG.cov.log
 igvtools count -z 5 -w 1 -e 0 $TAG.bam $TAG.tdf $CHROM &>> $TAG.cov.log  
 
 echo
-echo -e "command: bamCoverage --scaleFactor  $SCF -p $CPUS --filterRNAstrand reverse -b $TAG.bam -bs 1 -o $TAG.plus.bw  &> $TAG.cov.log"
-echo -e "command: bamCoverage --scaleFactor -$SCF -p $CPUS --filterRNAstrand forward -b $TAG.bam -bs 1 -o $TAG.minus.bw &>> $TAG.cov.log"
+echo -e "command: bamCoverage --scaleFactor  $SCF -p $CPUS --filterRNAstrand forward -b $TAG.bam -bs 1 -o $TAG.plus.bw  &> $TAG.cov.log"
+echo -e "command: bamCoverage --scaleFactor -$SCF -p $CPUS --filterRNAstrand reverse -b $TAG.bam -bs 1 -o $TAG.minus.bw &>> $TAG.cov.log"
 echo -e "command: igvtools count -z 5 -w 1 -e 0 $TAG.bam $TAG.tdf $CHROM &>> $TAG.cov.log\n"
